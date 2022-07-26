@@ -3,6 +3,7 @@ require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const routes = require('./routes/main');
 
 // create an instance of an express app
 const app = express();
@@ -12,10 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-
 app.use(bodyParser.json()); // parse application/json
 
 // main routes
-app.get('/status', (req, res, next) => {
-  res.status(200);
-  res.json({ 'status': 'ok' });
-});
+app.use('/', routes);
 
 // catch all other routes
 app.use((req, res, next) => {
