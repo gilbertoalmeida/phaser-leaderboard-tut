@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./routes/main');
+const secureRoutes = require('./routes/secure');
 
 // create an instance of an express app
 const app = express();
@@ -14,6 +15,9 @@ app.use(bodyParser.json()); // parse application/json
 
 // main routes
 app.use('/', routes);
+
+// secure routes
+app.use('/', secureRoutes);
 
 // catch all other routes
 app.use((req, res, next) => {
