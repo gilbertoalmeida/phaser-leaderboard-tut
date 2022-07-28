@@ -1,13 +1,13 @@
 ## phaser-leaderboard-tut
 
-Followinf this tutorial to implement a leaderboard in a phaser game:
+Following this tutorial to implement a leaderboard in a phaser game:
 
 https://phasertutorials.com/creating-a-phaser-3-leaderboard-with-user-authentication-using-node-js-express-mongodb-part-1/
 
 #
 
-### To run the server:
+### To run the server with auto reload:
 
 ```bash
-node app.js
+yarn dev
 ```
