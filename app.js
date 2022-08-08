@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./routes/main');
 const secureRoutes = require('./routes/secure');
+const cookieParser = require('cookie-parser');
+const passport = require('passport');
 
 // setup mongo connection
 const uri = process.env.MONGO_CONNECTION_URL;
@@ -27,11 +29,18 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
 
+app.use(cookieParser()); //By using cookie-parser, the request object will have the cookies included.
+
+// require passport auth
+require('./auth/auth');
+
 // main routes
 app.use('/', routes);
 
 // secure routes
-app.use('/', secureRoutes);
+// app.use('/', secureRoutes);
+app.use('/', passport.authenticate('jwt', { session: false }), secureRoutes); //secure routes usinge the passport JWT strategy from auth/auth.
+
 
 // catch all other routes
 app.use((req, res, next) => {
